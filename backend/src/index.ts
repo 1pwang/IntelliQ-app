@@ -5,8 +5,8 @@ import router from './routes/user.routes';
 dotenv.config();
 
 const app = express();
-const port = 3000;
-const url = "mongodb+srv://paulinewang222:nfzaC54scBtUqt30@cluster0.mywzxrj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+const port = process.env.PORT;
+const url = process.env.URL!;
 
 app.use(express.json());
 app.use('/api', router)
