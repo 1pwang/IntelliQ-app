@@ -12,8 +12,17 @@ export class UserController {
                 throw new Error('No email defined');
             }
             const newUser = await this.userService.signUp(email, password)
-            return newUser;
+            res.status(201).json(newUser);
         } catch (error){
+            res.status(500).json({Error: 'Unable to save user'})
+        }
+    }
+
+    async getUsers(req: any, res: any){
+        try {
+            const allUsers = await this.userService.getUsers();
+            res.status(201).json(allUsers);
+        } catch (error) {
             res.status(500)
         }
     }

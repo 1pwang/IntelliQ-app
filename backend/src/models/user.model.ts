@@ -12,7 +12,7 @@ export const userSchema = new Schema<UserDocument>({
     createdAt: { type: Date, default: Date.now }
 });
 
-const userModel = mongoose.model<UserDocument>('User', userSchema);
+const userModel = mongoose.model<UserDocument>('user', userSchema);
 export default userModel;
 
 

@@ -8,4 +8,8 @@ export class UserService {
     async signUp(email: string, password: string){
        return await this.userRepository.signUp(email, password)
     }
+
+    async getUsers(){
+        return await this.userRepository.getUsers();
+    }
 }
