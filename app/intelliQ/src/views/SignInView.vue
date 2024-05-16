@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import TheWelcome from '../components/TheWelcome.vue'
+
+import LoginTab from "@/components/LoginTab.vue";
 </script>
 
 <template>
   <main>
-    <TheWelcome />
+    <LoginTab />
   </main>
 </template>

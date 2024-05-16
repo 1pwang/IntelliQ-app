@@ -5,10 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="27bef5c3-15c0-4e7f-a549-2f97a6931dd3" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/app/intelliQ/src/js/userRegistration.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/intelliQ/src/plugins/http.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/intelliQ/src/services/userService.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/intelliQ/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/intelliQ/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/intelliQ/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/intelliQ/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/intelliQ/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/app/intelliQ/src/App.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/intelliQ/src/components/TheWelcome.vue" beforeDir="false" afterPath="$PROJECT_DIR$/app/intelliQ/src/components/LoginTab.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/intelliQ/src/main.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/intelliQ/src/main.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/intelliQ/src/router/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/intelliQ/src/router/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/intelliQ/src/views/HomeView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/app/intelliQ/src/views/SignInView.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,23 +33,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_MARK_IGNORED_FILES_AS_EXCLUDED": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/Users/paulinewangunyu/Documents/IntelliQ-app/backend",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "ts.external.directory.path": "/Users/paulinewangunyu/Documents/IntelliQ-app/node_modules/typescript/lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_MARK_IGNORED_FILES_AS_EXCLUDED&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/paulinewangunyu/Documents/IntelliQ-app/backend&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Users/paulinewangunyu/Documents/IntelliQ-app/node_modules/typescript/lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/backend" />
@@ -81,7 +88,8 @@
       <workItem from="1715512837221" duration="4722000" />
       <workItem from="1715526675382" duration="396000" />
       <workItem from="1715527764676" duration="3083000" />
-      <workItem from="1715778306762" duration="8745000" />
+      <workItem from="1715778306762" duration="8872000" />
+      <workItem from="1715860413910" duration="4479000" />
     </task>
     <servers />
   </component>
