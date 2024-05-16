@@ -1,13 +1,11 @@
-import { AxiosInstance } from 'axios';
+import axios from 'axios';
 export class UserService {
-    private http: AxiosInstance;
-    constructor(http: AxiosInstance) {
-        this.http = http;
+    constructor() {
     }
 
     async signUp(email: string, password: string) {
         try {
-           const response = await this.http.post('/api/signup', {email, password})
+           const response = await axios.post('http://localhost:3000/api/signup', {email, password})
             return response.data;
         } catch (error) {
             throw new Error('Unable to sign up')
