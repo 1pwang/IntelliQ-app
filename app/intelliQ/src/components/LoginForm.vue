@@ -6,7 +6,7 @@
     </div>
 
     <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-      <form class="space-y-6" @submit.prevent="handleSignUp">
+      <form class="space-y-6" @submit="handleSignUp">
         <div>
           <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email address</label>
           <div class="mt-2">
@@ -42,6 +42,7 @@
 <script setup lang="ts">
 import { ref, getCurrentInstance } from 'vue'
 import {UserService} from "@/services/userService";
+import router from "@/router";
 
 const email = ref('');
 const password = ref('');
@@ -54,6 +55,8 @@ const handleSignUp = async () => {
   try {
     const response = await userService.signUp(email.value, password.value);
     console.log('Login successful:', response);
+    await router.push('/home');
+
   } catch (err) {
     error.value = 'Login failed. Please check your credentials.';
   }
