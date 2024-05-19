@@ -1,4 +1,4 @@
-import userModel, {UserDocument, userSchema} from "../models/user.model";
+import userModel, {UserDocument} from "../models/user.model";
 import mongoose, {Model} from "mongoose";
 import UserModel from "../models/user.model";
 
