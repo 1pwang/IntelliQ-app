@@ -1,313 +1,289 @@
 <template>
-  <header class="absolute inset-x-0 top-0 z-50 flex h-16 border-b border-gray-900/10">
-    <div class="mx-auto flex w-full max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-      <div class="flex flex-1 items-center gap-x-6">
-        <button type="button" class="-m-3 p-3 md:hidden" @click="mobileMenuOpen = true">
-          <span class="sr-only">Open main menu</span>
-          <Bars3Icon class="h-5 w-5 text-gray-900" aria-hidden="true" />
-        </button>
-        <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="Your Company" />
-      </div>
-      <nav class="hidden md:flex md:gap-x-11 md:text-sm md:font-semibold md:leading-6 md:text-gray-700">
-        <a v-for="(item, itemIdx) in navigation" :key="itemIdx" :href="item.href">{{ item.name }}</a>
-      </nav>
-      <div class="flex flex-1 items-center justify-end gap-x-8">
-        <button type="button" class="-m-2.5 p-2.5 text-gray-400 hover:text-gray-500">
-          <span class="sr-only">View notifications</span>
-          <BellIcon class="h-6 w-6" aria-hidden="true" />
-        </button>
-        <a href="#" class="-m-1.5 p-1.5">
-          <span class="sr-only">Your profile</span>
-          <img class="h-8 w-8 rounded-full bg-gray-800" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" />
-        </a>
-      </div>
-    </div>
-    <Dialog class="lg:hidden" @close="mobileMenuOpen = false" :open="mobileMenuOpen">
-      <div class="fixed inset-0 z-50" />
-      <DialogPanel class="fixed inset-y-0 left-0 z-50 w-full overflow-y-auto bg-white px-4 pb-6 sm:max-w-sm sm:px-6 sm:ring-1 sm:ring-gray-900/10">
-        <div class="-ml-0.5 flex h-16 items-center gap-x-6">
-          <button type="button" class="-m-2.5 p-2.5 text-gray-700" @click="mobileMenuOpen = false">
-            <span class="sr-only">Close menu</span>
-            <XMarkIcon class="h-6 w-6" aria-hidden="true" />
-          </button>
-          <div class="-ml-0.5">
-            <a href="#" class="-m-1.5 block p-1.5">
-              <span class="sr-only">Your Company</span>
-              <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="" />
-            </a>
-          </div>
-        </div>
-        <div class="mt-2 space-y-2">
-          <a v-for="item in navigation" :key="item.name" :href="item.href" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">{{ item.name }}</a>
-        </div>
-      </DialogPanel>
-    </Dialog>
-  </header>
+  <!--
+    This example requires updating your template:
 
-  <main>
-    <div class="relative isolate overflow-hidden pt-16">
-      <!-- Secondary navigation -->
-      <header class="pb-4 pt-6 sm:pb-6">
-        <div class="mx-auto flex max-w-7xl flex-wrap items-center gap-6 px-4 sm:flex-nowrap sm:px-6 lg:px-8">
-          <h1 class="text-base font-semibold leading-7 text-gray-900">Cashflow</h1>
-          <div class="order-last flex w-full gap-x-8 text-sm font-semibold leading-6 sm:order-none sm:w-auto sm:border-l sm:border-gray-200 sm:pl-6 sm:leading-7">
-            <a v-for="item in secondaryNavigation" :key="item.name" :href="item.href" :class="item.current ? 'text-indigo-600' : 'text-gray-700'">{{ item.name }}</a>
-          </div>
-          <a href="#" class="ml-auto flex items-center gap-x-1 rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-            <PlusSmallIcon class="-ml-1.5 h-5 w-5" aria-hidden="true" />
-            New invoice
-          </a>
-        </div>
-      </header>
+    ```
+    <html class="h-full bg-gray-900">
+    <body class="h-full">
+    ```
+  -->
+  <div>
+    <TransitionRoot as="template" :show="sidebarOpen">
+      <Dialog class="relative z-50 xl:hidden" @close="sidebarOpen = false">
+        <TransitionChild as="template" enter="transition-opacity ease-linear duration-300" enter-from="opacity-0" enter-to="opacity-100" leave="transition-opacity ease-linear duration-300" leave-from="opacity-100" leave-to="opacity-0">
+          <div class="fixed inset-0 bg-gray-900/80" />
+        </TransitionChild>
 
-      <!-- Stats -->
-      <div class="border-b border-b-gray-900/10 lg:border-t lg:border-t-gray-900/5">
-        <dl class="mx-auto grid max-w-7xl grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 lg:px-2 xl:px-0">
-          <div v-for="(stat, statIdx) in stats" :key="stat.name" :class="[statIdx % 2 === 1 ? 'sm:border-l' : statIdx === 2 ? 'lg:border-l' : '', 'flex items-baseline flex-wrap justify-between gap-y-2 gap-x-4 border-t border-gray-900/5 px-4 py-10 sm:px-6 lg:border-t-0 xl:px-8']">
-            <dt class="text-sm font-medium leading-6 text-gray-500">{{ stat.name }}</dt>
-            <dd :class="[stat.changeType === 'negative' ? 'text-rose-600' : 'text-gray-700', 'text-xs font-medium']">{{ stat.change }}</dd>
-            <dd class="w-full flex-none text-3xl font-medium leading-10 tracking-tight text-gray-900">{{ stat.value }}</dd>
-          </div>
-        </dl>
-      </div>
-
-      <div class="absolute left-0 top-full -z-10 mt-96 origin-top-left translate-y-40 -rotate-90 transform-gpu opacity-20 blur-3xl sm:left-1/2 sm:-ml-96 sm:-mt-10 sm:translate-y-0 sm:rotate-0 sm:transform-gpu sm:opacity-50" aria-hidden="true">
-        <div class="aspect-[1154/678] w-[72.125rem] bg-gradient-to-br from-[#FF80B5] to-[#9089FC]" style="clip-path: polygon(100% 38.5%, 82.6% 100%, 60.2% 37.7%, 52.4% 32.1%, 47.5% 41.8%, 45.2% 65.6%, 27.5% 23.4%, 0.1% 35.3%, 17.9% 0%, 27.7% 23.4%, 76.2% 2.5%, 74.2% 56%, 100% 38.5%)" />
-      </div>
-    </div>
-
-    <div class="space-y-16 py-16 xl:space-y-20">
-      <!-- Recent activity table -->
-      <div>
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 class="mx-auto max-w-2xl text-base font-semibold leading-6 text-gray-900 lg:mx-0 lg:max-w-none">Recent activity</h2>
-        </div>
-        <div class="mt-6 overflow-hidden border-t border-gray-100">
-          <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div class="mx-auto max-w-2xl lg:mx-0 lg:max-w-none">
-              <table class="w-full text-left">
-                <thead class="sr-only">
-                <tr>
-                  <th>Amount</th>
-                  <th class="hidden sm:table-cell">Client</th>
-                  <th>More details</th>
-                </tr>
-                </thead>
-                <tbody>
-                <template v-for="day in days" :key="day.dateTime">
-                  <tr class="text-sm leading-6 text-gray-900">
-                    <th scope="colgroup" colspan="3" class="relative isolate py-2 font-semibold">
-                      <time :datetime="day.dateTime">{{ day.date }}</time>
-                      <div class="absolute inset-y-0 right-full -z-10 w-screen border-b border-gray-200 bg-gray-50" />
-                      <div class="absolute inset-y-0 left-0 -z-10 w-screen border-b border-gray-200 bg-gray-50" />
-                    </th>
-                  </tr>
-                  <tr v-for="transaction in day.transactions" :key="transaction.id">
-                    <td class="relative py-5 pr-6">
-                      <div class="flex gap-x-6">
-                        <component :is="transaction.icon" class="hidden h-6 w-5 flex-none text-gray-400 sm:block" aria-hidden="true" />
-                        <div class="flex-auto">
-                          <div class="flex items-start gap-x-3">
-                            <div class="text-sm font-medium leading-6 text-gray-900">{{ transaction.amount }}</div>
-                            <div :class="[statuses[transaction.status], 'rounded-md py-1 px-2 text-xs font-medium ring-1 ring-inset']">{{ transaction.status }}</div>
-                          </div>
-                          <div v-if="transaction.tax" class="mt-1 text-xs leading-5 text-gray-500">{{ transaction.tax }} tax</div>
-                        </div>
-                      </div>
-                      <div class="absolute bottom-0 right-full h-px w-screen bg-gray-100" />
-                      <div class="absolute bottom-0 left-0 h-px w-screen bg-gray-100" />
-                    </td>
-                    <td class="hidden py-5 pr-6 sm:table-cell">
-                      <div class="text-sm leading-6 text-gray-900">{{ transaction.client }}</div>
-                      <div class="mt-1 text-xs leading-5 text-gray-500">{{ transaction.description }}</div>
-                    </td>
-                    <td class="py-5 text-right">
-                      <div class="flex justify-end">
-                        <a :href="transaction.href" class="text-sm font-medium leading-6 text-indigo-600 hover:text-indigo-500"
-                        >View<span class="hidden sm:inline"> transaction</span><span class="sr-only">, invoice #{{ transaction.invoiceNumber }}, {{ transaction.client }}</span></a
-                        >
-                      </div>
-                      <div class="mt-1 text-xs leading-5 text-gray-500">
-                        Invoice <span class="text-gray-900">#{{ transaction.invoiceNumber }}</span>
-                      </div>
-                    </td>
-                  </tr>
-                </template>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Recent client list-->
-      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="mx-auto max-w-2xl lg:mx-0 lg:max-w-none">
-          <div class="flex items-center justify-between">
-            <h2 class="text-base font-semibold leading-7 text-gray-900">Recent clients</h2>
-            <a href="#" class="text-sm font-semibold leading-6 text-indigo-600 hover:text-indigo-500">View all<span class="sr-only">, clients</span></a>
-          </div>
-          <ul role="list" class="mt-6 grid grid-cols-1 gap-x-6 gap-y-8 lg:grid-cols-3 xl:gap-x-8">
-            <li v-for="client in clients" :key="client.id" class="overflow-hidden rounded-xl border border-gray-200">
-              <div class="flex items-center gap-x-4 border-b border-gray-900/5 bg-gray-50 p-6">
-                <img :src="client.imageUrl" :alt="client.name" class="h-12 w-12 flex-none rounded-lg bg-white object-cover ring-1 ring-gray-900/10" />
-                <div class="text-sm font-medium leading-6 text-gray-900">{{ client.name }}</div>
-                <Menu as="div" class="relative ml-auto">
-                  <MenuButton class="-m-2.5 block p-2.5 text-gray-400 hover:text-gray-500">
-                    <span class="sr-only">Open options</span>
-                    <EllipsisHorizontalIcon class="h-5 w-5" aria-hidden="true" />
-                  </MenuButton>
-                  <transition enter-active-class="transition ease-out duration-100" enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100" leave-active-class="transition ease-in duration-75" leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
-                    <MenuItems class="absolute right-0 z-10 mt-0.5 w-32 origin-top-right rounded-md bg-white py-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none">
-                      <MenuItem v-slot="{ active }">
-                        <a href="#" :class="[active ? 'bg-gray-50' : '', 'block px-3 py-1 text-sm leading-6 text-gray-900']"
-                        >View<span class="sr-only">, {{ client.name }}</span></a
-                        >
-                      </MenuItem>
-                      <MenuItem v-slot="{ active }">
-                        <a href="#" :class="[active ? 'bg-gray-50' : '', 'block px-3 py-1 text-sm leading-6 text-gray-900']"
-                        >Edit<span class="sr-only">, {{ client.name }}</span></a
-                        >
-                      </MenuItem>
-                    </MenuItems>
-                  </transition>
-                </Menu>
+        <div class="fixed inset-0 flex">
+          <TransitionChild as="template" enter="transition ease-in-out duration-300 transform" enter-from="-translate-x-full" enter-to="translate-x-0" leave="transition ease-in-out duration-300 transform" leave-from="translate-x-0" leave-to="-translate-x-full">
+            <DialogPanel class="relative mr-16 flex w-full max-w-xs flex-1">
+              <TransitionChild as="template" enter="ease-in-out duration-300" enter-from="opacity-0" enter-to="opacity-100" leave="ease-in-out duration-300" leave-from="opacity-100" leave-to="opacity-0">
+                <div class="absolute left-full top-0 flex w-16 justify-center pt-5">
+                  <button type="button" class="-m-2.5 p-2.5" @click="sidebarOpen = false">
+                    <span class="sr-only">Close sidebar</span>
+                    <XMarkIcon class="h-6 w-6 text-white" aria-hidden="true" />
+                  </button>
+                </div>
+              </TransitionChild>
+              <!-- Sidebar component, swap this element with another sidebar if you like -->
+              <div class="flex grow flex-col gap-y-5 overflow-y-auto bg-gray-900 px-6 ring-1 ring-white/10">
+                <div class="flex h-16 shrink-0 items-center">
+                  <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company" />
+                </div>
+                <nav class="flex flex-1 flex-col">
+                  <ul role="list" class="flex flex-1 flex-col gap-y-7">
+                    <li>
+                      <ul role="list" class="-mx-2 space-y-1">
+                        <li v-for="item in navigation" :key="item.name">
+                          <a :href="item.href" :class="[item.current ? 'bg-gray-800 text-white' : 'text-gray-400 hover:text-white hover:bg-gray-800', 'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold']">
+                            <component :is="item.icon" class="h-6 w-6 shrink-0" aria-hidden="true" />
+                            {{ item.name }}
+                          </a>
+                        </li>
+                      </ul>
+                    </li>
+                    <li>
+                      <div class="text-xs font-semibold leading-6 text-gray-400">Your teams</div>
+                      <ul role="list" class="-mx-2 mt-2 space-y-1">
+                        <li v-for="team in teams" :key="team.name">
+                          <a :href="team.href" :class="[team.current ? 'bg-gray-800 text-white' : 'text-gray-400 hover:text-white hover:bg-gray-800', 'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold']">
+                            <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border border-gray-700 bg-gray-800 text-[0.625rem] font-medium text-gray-400 group-hover:text-white">{{ team.initial }}</span>
+                            <span class="truncate">{{ team.name }}</span>
+                          </a>
+                        </li>
+                      </ul>
+                    </li>
+                    <li class="-mx-6 mt-auto">
+                      <a href="#" class="flex items-center gap-x-4 px-6 py-3 text-sm font-semibold leading-6 text-white hover:bg-gray-800">
+                        <img class="h-8 w-8 rounded-full bg-gray-800" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" />
+                        <span class="sr-only">Your profile</span>
+                        <span aria-hidden="true">Tom Cook</span>
+                      </a>
+                    </li>
+                  </ul>
+                </nav>
               </div>
-              <dl class="-my-3 divide-y divide-gray-100 px-6 py-4 text-sm leading-6">
-                <div class="flex justify-between gap-x-4 py-3">
-                  <dt class="text-gray-500">Last invoice</dt>
-                  <dd class="text-gray-700">
-                    <time :datetime="client.lastInvoice.dateTime">{{ client.lastInvoice.date }}</time>
-                  </dd>
-                </div>
-                <div class="flex justify-between gap-x-4 py-3">
-                  <dt class="text-gray-500">Amount</dt>
-                  <dd class="flex items-start gap-x-2">
-                    <div class="font-medium text-gray-900">{{ client.lastInvoice.amount }}</div>
-                    <div :class="[statuses[client.lastInvoice.status], 'rounded-md py-1 px-2 text-xs font-medium ring-1 ring-inset']">{{ client.lastInvoice.status }}</div>
-                  </dd>
-                </div>
-              </dl>
+            </DialogPanel>
+          </TransitionChild>
+        </div>
+      </Dialog>
+    </TransitionRoot>
+
+    <!-- Static sidebar for desktop -->
+    <div class="hidden xl:fixed xl:inset-y-0 xl:z-50 xl:flex xl:w-72 xl:flex-col">
+      <!-- Sidebar component, swap this element with another sidebar if you like -->
+      <div class="flex grow flex-col gap-y-5 overflow-y-auto bg-black/10 px-6 ring-1 ring-white/5">
+        <div class="flex h-16 shrink-0 items-center">
+          <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company" />
+        </div>
+        <nav class="flex flex-1 flex-col">
+          <ul role="list" class="flex flex-1 flex-col gap-y-7">
+            <li>
+              <ul role="list" class="-mx-2 space-y-1">
+                <li v-for="item in navigation" :key="item.name">
+                  <a :href="item.href" :class="[item.current ? 'bg-gray-800 text-white' : 'text-gray-400 hover:text-white hover:bg-gray-800', 'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold']">
+                    <component :is="item.icon" class="h-6 w-6 shrink-0" aria-hidden="true" />
+                    {{ item.name }}
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <div class="text-xs font-semibold leading-6 text-gray-400">Your teams</div>
+              <ul role="list" class="-mx-2 mt-2 space-y-1">
+                <li v-for="team in teams" :key="team.name">
+                  <a :href="team.href" :class="[team.current ? 'bg-gray-800 text-white' : 'text-gray-400 hover:text-white hover:bg-gray-800', 'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold']">
+                    <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border border-gray-700 bg-gray-800 text-[0.625rem] font-medium text-gray-400 group-hover:text-white">{{ team.initial }}</span>
+                    <span class="truncate">{{ team.name }}</span>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="-mx-6 mt-auto">
+              <a href="#" class="flex items-center gap-x-4 px-6 py-3 text-sm font-semibold leading-6 text-white hover:bg-gray-800">
+                <img class="h-8 w-8 rounded-full bg-gray-800" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" />
+                <span class="sr-only">Your profile</span>
+                <span aria-hidden="true">Tom Cook</span>
+              </a>
             </li>
           </ul>
-        </div>
+        </nav>
       </div>
     </div>
-  </main>
+
+    <div class="xl:pl-72">
+      <!-- Sticky search header -->
+      <div class="sticky top-0 z-40 flex h-16 shrink-0 items-center gap-x-6 border-b border-white/5 bg-gray-900 px-4 shadow-sm sm:px-6 lg:px-8">
+        <button type="button" class="-m-2.5 p-2.5 text-white xl:hidden" @click="sidebarOpen = true">
+          <span class="sr-only">Open sidebar</span>
+          <Bars3Icon class="h-5 w-5" aria-hidden="true" />
+        </button>
+
+        <div class="flex flex-1 gap-x-4 self-stretch lg:gap-x-6">
+          <form class="flex flex-1" action="#" method="GET">
+            <label for="search-field" class="sr-only">Search</label>
+            <div class="relative w-full">
+              <MagnifyingGlassIcon class="pointer-events-none absolute inset-y-0 left-0 h-full w-5 text-gray-500" aria-hidden="true" />
+              <input id="search-field" class="block h-full w-full border-0 bg-transparent py-0 pl-8 pr-0 text-white focus:ring-0 sm:text-sm" placeholder="Search..." type="search" name="search" />
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <main class="lg:pr-96">
+        <header class="flex items-center justify-between border-b border-white/5 px-4 py-4 sm:px-6 sm:py-6 lg:px-8">
+          <h1 class="text-base font-semibold leading-7 text-white">Deployments</h1>
+
+          <!-- Sort dropdown -->
+          <Menu as="div" class="relative">
+            <MenuButton class="flex items-center gap-x-1 text-sm font-medium leading-6 text-white">
+              Sort by
+              <ChevronUpDownIcon class="h-5 w-5 text-gray-500" aria-hidden="true" />
+            </MenuButton>
+            <transition enter-active-class="transition ease-out duration-100" enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100" leave-active-class="transition ease-in duration-75" leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
+              <MenuItems class="absolute right-0 z-10 mt-2.5 w-40 origin-top-right rounded-md bg-white py-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none">
+                <MenuItem v-slot="{ active }">
+                  <a href="#" :class="[active ? 'bg-gray-50' : '', 'block px-3 py-1 text-sm leading-6 text-gray-900']">Name</a>
+                </MenuItem>
+                <MenuItem v-slot="{ active }">
+                  <a href="#" :class="[active ? 'bg-gray-50' : '', 'block px-3 py-1 text-sm leading-6 text-gray-900']">Date updated</a>
+                </MenuItem>
+                <MenuItem v-slot="{ active }">
+                  <a href="#" :class="[active ? 'bg-gray-50' : '', 'block px-3 py-1 text-sm leading-6 text-gray-900']">Environment</a>
+                </MenuItem>
+              </MenuItems>
+            </transition>
+          </Menu>
+        </header>
+
+        <!-- Deployment list -->
+        <ul role="list" class="divide-y divide-white/5">
+          <li v-for="deployment in deployments" :key="deployment.id" class="relative flex items-center space-x-4 px-4 py-4 sm:px-6 lg:px-8">
+            <div class="min-w-0 flex-auto">
+              <div class="flex items-center gap-x-3">
+                <div :class="[statuses[deployment.status], 'flex-none rounded-full p-1']">
+                  <div class="h-2 w-2 rounded-full bg-current" />
+                </div>
+                <h2 class="min-w-0 text-sm font-semibold leading-6 text-white">
+                  <a :href="deployment.href" class="flex gap-x-2">
+                    <span class="truncate">{{ deployment.teamName }}</span>
+                    <span class="text-gray-400">/</span>
+                    <span class="whitespace-nowrap">{{ deployment.projectName }}</span>
+                    <span class="absolute inset-0" />
+                  </a>
+                </h2>
+              </div>
+              <div class="mt-3 flex items-center gap-x-2.5 text-xs leading-5 text-gray-400">
+                <p class="truncate">{{ deployment.description }}</p>
+                <svg viewBox="0 0 2 2" class="h-0.5 w-0.5 flex-none fill-gray-300">
+                  <circle cx="1" cy="1" r="1" />
+                </svg>
+                <p class="whitespace-nowrap">{{ deployment.statusText }}</p>
+              </div>
+            </div>
+            <div :class="[environments[deployment.environment], 'rounded-full flex-none py-1 px-2 text-xs font-medium ring-1 ring-inset']">{{ deployment.environment }}</div>
+            <ChevronRightIcon class="h-5 w-5 flex-none text-gray-400" aria-hidden="true" />
+          </li>
+        </ul>
+      </main>
+
+      <!-- Activity feed -->
+      <aside class="bg-black/10 lg:fixed lg:bottom-0 lg:right-0 lg:top-16 lg:w-96 lg:overflow-y-auto lg:border-l lg:border-white/5">
+        <header class="flex items-center justify-between border-b border-white/5 px-4 py-4 sm:px-6 sm:py-6 lg:px-8">
+          <h2 class="text-base font-semibold leading-7 text-white">Activity feed</h2>
+          <a href="#" class="text-sm font-semibold leading-6 text-indigo-400">View all</a>
+        </header>
+        <ul role="list" class="divide-y divide-white/5">
+          <li v-for="item in activityItems" :key="item.commit" class="px-4 py-4 sm:px-6 lg:px-8">
+            <div class="flex items-center gap-x-3">
+              <img :src="item.user.imageUrl" alt="" class="h-6 w-6 flex-none rounded-full bg-gray-800" />
+              <h3 class="flex-auto truncate text-sm font-semibold leading-6 text-white">{{ item.user.name }}</h3>
+              <time :datetime="item.dateTime" class="flex-none text-xs text-gray-600">{{ item.date }}</time>
+            </div>
+            <p class="mt-3 truncate text-sm text-gray-500">
+              Pushed to <span class="text-gray-400">{{ item.projectName }}</span> (<span class="font-mono text-gray-400">{{ item.commit }}</span> on <span class="text-gray-400">{{ item.branch }}</span
+            >)
+            </p>
+          </li>
+        </ul>
+      </aside>
+    </div>
+  </div>
 </template>
 
 <script setup>
 import { ref } from 'vue'
-import { Dialog, DialogPanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
 import {
-  ArrowDownCircleIcon,
-  ArrowPathIcon,
-  ArrowUpCircleIcon,
-  Bars3Icon,
-  EllipsisHorizontalIcon,
-  PlusSmallIcon,
-} from '@heroicons/vue/20/solid'
-import { BellIcon, XMarkIcon } from '@heroicons/vue/24/outline'
+  Dialog,
+  DialogPanel,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuItems,
+  TransitionChild,
+  TransitionRoot,
+} from '@headlessui/vue'
+import {
+  ChartBarSquareIcon,
+  Cog6ToothIcon,
+  FolderIcon,
+  GlobeAltIcon,
+  ServerIcon,
+  SignalIcon,
+  XMarkIcon,
+} from '@heroicons/vue/24/outline'
+import { Bars3Icon, ChevronRightIcon, ChevronUpDownIcon, MagnifyingGlassIcon } from '@heroicons/vue/20/solid'
 
 const navigation = [
-  { name: 'Home', href: '#' },
-  { name: 'Invoices', href: '#' },
-  { name: 'Clients', href: '#' },
-  { name: 'Expenses', href: '#' },
+  { name: 'Projects', href: '#', icon: FolderIcon, current: false },
+  { name: 'Deployments', href: '#', icon: ServerIcon, current: true },
+  { name: 'Activity', href: '#', icon: SignalIcon, current: false },
+  { name: 'Domains', href: '#', icon: GlobeAltIcon, current: false },
+  { name: 'Usage', href: '#', icon: ChartBarSquareIcon, current: false },
+  { name: 'Settings', href: '#', icon: Cog6ToothIcon, current: false },
 ]
-const secondaryNavigation = [
-  { name: 'Last 7 days', href: '#', current: true },
-  { name: 'Last 30 days', href: '#', current: false },
-  { name: 'All-time', href: '#', current: false },
-]
-const stats = [
-  { name: 'Revenue', value: '$405,091.00', change: '+4.75%', changeType: 'positive' },
-  { name: 'Overdue invoices', value: '$12,787.00', change: '+54.02%', changeType: 'negative' },
-  { name: 'Outstanding invoices', value: '$245,988.00', change: '-1.39%', changeType: 'positive' },
-  { name: 'Expenses', value: '$30,156.00', change: '+10.18%', changeType: 'negative' },
+const teams = [
+  { id: 1, name: 'Planetaria', href: '#', initial: 'P', current: false },
+  { id: 2, name: 'Protocol', href: '#', initial: 'P', current: false },
+  { id: 3, name: 'Tailwind Labs', href: '#', initial: 'T', current: false },
 ]
 const statuses = {
-  Paid: 'text-green-700 bg-green-50 ring-green-600/20',
-  Withdraw: 'text-gray-600 bg-gray-50 ring-gray-500/10',
-  Overdue: 'text-red-700 bg-red-50 ring-red-600/10',
+  offline: 'text-gray-500 bg-gray-100/10',
+  online: 'text-green-400 bg-green-400/10',
+  error: 'text-rose-400 bg-rose-400/10',
 }
-const days = [
-  {
-    date: 'Today',
-    dateTime: '2023-03-22',
-    transactions: [
-      {
-        id: 1,
-        invoiceNumber: '00012',
-        href: '#',
-        amount: '$7,600.00 USD',
-        tax: '$500.00',
-        status: 'Paid',
-        client: 'Reform',
-        description: 'Website redesign',
-        icon: ArrowUpCircleIcon,
-      },
-      {
-        id: 2,
-        invoiceNumber: '00011',
-        href: '#',
-        amount: '$10,000.00 USD',
-        status: 'Withdraw',
-        client: 'Tom Cook',
-        description: 'Salary',
-        icon: ArrowDownCircleIcon,
-      },
-      {
-        id: 3,
-        invoiceNumber: '00009',
-        href: '#',
-        amount: '$2,000.00 USD',
-        tax: '$130.00',
-        status: 'Overdue',
-        client: 'Tuple',
-        description: 'Logo design',
-        icon: ArrowPathIcon,
-      },
-    ],
-  },
-  {
-    date: 'Yesterday',
-    dateTime: '2023-03-21',
-    transactions: [
-      {
-        id: 4,
-        invoiceNumber: '00010',
-        href: '#',
-        amount: '$14,000.00 USD',
-        tax: '$900.00',
-        status: 'Paid',
-        client: 'SavvyCal',
-        description: 'Website redesign',
-        icon: ArrowUpCircleIcon,
-      },
-    ],
-  },
-]
-const clients = [
+const environments = {
+  Preview: 'text-gray-400 bg-gray-400/10 ring-gray-400/20',
+  Production: 'text-indigo-400 bg-indigo-400/10 ring-indigo-400/30',
+}
+const deployments = [
   {
     id: 1,
-    name: 'Tuple',
-    imageUrl: 'https://tailwindui.com/img/logos/48x48/tuple.svg',
-    lastInvoice: { date: 'December 13, 2022', dateTime: '2022-12-13', amount: '$2,000.00', status: 'Overdue' },
+    href: '#',
+    projectName: 'ios-app',
+    teamName: 'Planetaria',
+    status: 'offline',
+    statusText: 'Initiated 1m 32s ago',
+    description: 'Deploys from GitHub',
+    environment: 'Preview',
   },
+  // More deployments...
+]
+const activityItems = [
   {
-    id: 2,
-    name: 'SavvyCal',
-    imageUrl: 'https://tailwindui.com/img/logos/48x48/savvycal.svg',
-    lastInvoice: { date: 'January 22, 2023', dateTime: '2023-01-22', amount: '$14,000.00', status: 'Paid' },
+    user: {
+      name: 'Michael Foster',
+      imageUrl:
+          'https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+    },
+    projectName: 'ios-app',
+    commit: '2d89f0c8',
+    branch: 'main',
+    date: '1h',
+    dateTime: '2023-01-23T11:00',
   },
-  {
-    id: 3,
-    name: 'Reform',
-    imageUrl: 'https://tailwindui.com/img/logos/48x48/reform.svg',
-    lastInvoice: { date: 'January 23, 2023', dateTime: '2023-01-23', amount: '$7,600.00', status: 'Paid' },
-  },
+  // More items...
 ]
 
-const mobileMenuOpen = ref(false)
+const sidebarOpen = ref(false)
 </script>
