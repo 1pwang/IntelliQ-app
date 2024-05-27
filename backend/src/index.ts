@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import cors from 'cors'
 import userRouter from './routes/user.routes';
 import subjectRouter from "./routes/subject.routes";
+import timerRouter from "./routes/timer.routes";
 dotenv.config();
 
 const app = express();
@@ -12,7 +13,7 @@ const url = process.env.URL!;
 
 app.use(cors());
 app.use(express.json());
-app.use('/api', userRouter, subjectRouter)
+app.use('/api', userRouter, subjectRouter, timerRouter)
 
 mongoose.connect(url)
     .then(result => console.log('Connected'))
