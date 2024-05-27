@@ -1,12 +1,4 @@
 <template>
-  <!--
-    This example requires updating your template:
-
-    ```
-    <html class="h-full bg-gray-900">
-    <body class="h-full">
-    ```
-  -->
   <div>
     <TransitionRoot as="template" :show="sidebarOpen">
       <Dialog class="relative z-50 xl:hidden" @close="sidebarOpen = false">
@@ -130,83 +122,83 @@
         </div>
       </div>
 
-      <main class="lg:pr-96">
-        <header class="flex items-center justify-between border-b border-white/5 px-4 py-4 sm:px-6 sm:py-6 lg:px-8">
-          <h1 class="text-base font-semibold leading-7 text-white">Deployments</h1>
+<!--      <main class="lg:pr-96">-->
+<!--        <header class="flex items-center justify-between border-b border-white/5 px-4 py-4 sm:px-6 sm:py-6 lg:px-8">-->
+<!--          <h1 class="text-base font-semibold leading-7 text-white">Deployments</h1>-->
 
-          <!-- Sort dropdown -->
-          <Menu as="div" class="relative">
-            <MenuButton class="flex items-center gap-x-1 text-sm font-medium leading-6 text-white">
-              Sort by
-              <ChevronUpDownIcon class="h-5 w-5 text-gray-500" aria-hidden="true" />
-            </MenuButton>
-            <transition enter-active-class="transition ease-out duration-100" enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100" leave-active-class="transition ease-in duration-75" leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
-              <MenuItems class="absolute right-0 z-10 mt-2.5 w-40 origin-top-right rounded-md bg-white py-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none">
-                <MenuItem v-slot="{ active }">
-                  <a href="#" :class="[active ? 'bg-gray-50' : '', 'block px-3 py-1 text-sm leading-6 text-gray-900']">Name</a>
-                </MenuItem>
-                <MenuItem v-slot="{ active }">
-                  <a href="#" :class="[active ? 'bg-gray-50' : '', 'block px-3 py-1 text-sm leading-6 text-gray-900']">Date updated</a>
-                </MenuItem>
-                <MenuItem v-slot="{ active }">
-                  <a href="#" :class="[active ? 'bg-gray-50' : '', 'block px-3 py-1 text-sm leading-6 text-gray-900']">Environment</a>
-                </MenuItem>
-              </MenuItems>
-            </transition>
-          </Menu>
-        </header>
+<!--          &lt;!&ndash; Sort dropdown &ndash;&gt;-->
+<!--          <Menu as="div" class="relative">-->
+<!--            <MenuButton class="flex items-center gap-x-1 text-sm font-medium leading-6 text-white">-->
+<!--              Sort by-->
+<!--              <ChevronUpDownIcon class="h-5 w-5 text-gray-500" aria-hidden="true" />-->
+<!--            </MenuButton>-->
+<!--            <transition enter-active-class="transition ease-out duration-100" enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100" leave-active-class="transition ease-in duration-75" leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">-->
+<!--              <MenuItems class="absolute right-0 z-10 mt-2.5 w-40 origin-top-right rounded-md bg-white py-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none">-->
+<!--                <MenuItem v-slot="{ active }">-->
+<!--                  <a href="#" :class="[active ? 'bg-gray-50' : '', 'block px-3 py-1 text-sm leading-6 text-gray-900']">Name</a>-->
+<!--                </MenuItem>-->
+<!--                <MenuItem v-slot="{ active }">-->
+<!--                  <a href="#" :class="[active ? 'bg-gray-50' : '', 'block px-3 py-1 text-sm leading-6 text-gray-900']">Date updated</a>-->
+<!--                </MenuItem>-->
+<!--                <MenuItem v-slot="{ active }">-->
+<!--                  <a href="#" :class="[active ? 'bg-gray-50' : '', 'block px-3 py-1 text-sm leading-6 text-gray-900']">Environment</a>-->
+<!--                </MenuItem>-->
+<!--              </MenuItems>-->
+<!--            </transition>-->
+<!--          </Menu>-->
+<!--        </header>-->
 
-        <!-- Deployment list -->
-        <ul role="list" class="divide-y divide-white/5">
-          <li v-for="deployment in deployments" :key="deployment.id" class="relative flex items-center space-x-4 px-4 py-4 sm:px-6 lg:px-8">
-            <div class="min-w-0 flex-auto">
-              <div class="flex items-center gap-x-3">
-                <div :class="[statuses[deployment.status], 'flex-none rounded-full p-1']">
-                  <div class="h-2 w-2 rounded-full bg-current" />
-                </div>
-                <h2 class="min-w-0 text-sm font-semibold leading-6 text-white">
-                  <a :href="deployment.href" class="flex gap-x-2">
-                    <span class="truncate">{{ deployment.teamName }}</span>
-                    <span class="text-gray-400">/</span>
-                    <span class="whitespace-nowrap">{{ deployment.projectName }}</span>
-                    <span class="absolute inset-0" />
-                  </a>
-                </h2>
-              </div>
-              <div class="mt-3 flex items-center gap-x-2.5 text-xs leading-5 text-gray-400">
-                <p class="truncate">{{ deployment.description }}</p>
-                <svg viewBox="0 0 2 2" class="h-0.5 w-0.5 flex-none fill-gray-300">
-                  <circle cx="1" cy="1" r="1" />
-                </svg>
-                <p class="whitespace-nowrap">{{ deployment.statusText }}</p>
-              </div>
-            </div>
-            <div :class="[environments[deployment.environment], 'rounded-full flex-none py-1 px-2 text-xs font-medium ring-1 ring-inset']">{{ deployment.environment }}</div>
-            <ChevronRightIcon class="h-5 w-5 flex-none text-gray-400" aria-hidden="true" />
-          </li>
-        </ul>
-      </main>
+<!--        &lt;!&ndash; Deployment list &ndash;&gt;-->
+<!--        <ul role="list" class="divide-y divide-white/5">-->
+<!--          <li v-for="deployment in deployments" :key="deployment.id" class="relative flex items-center space-x-4 px-4 py-4 sm:px-6 lg:px-8">-->
+<!--            <div class="min-w-0 flex-auto">-->
+<!--              <div class="flex items-center gap-x-3">-->
+<!--                <div :class="[statuses[deployment.status], 'flex-none rounded-full p-1']">-->
+<!--                  <div class="h-2 w-2 rounded-full bg-current" />-->
+<!--                </div>-->
+<!--                <h2 class="min-w-0 text-sm font-semibold leading-6 text-white">-->
+<!--                  <a :href="deployment.href" class="flex gap-x-2">-->
+<!--                    <span class="truncate">{{ deployment.teamName }}</span>-->
+<!--                    <span class="text-gray-400">/</span>-->
+<!--                    <span class="whitespace-nowrap">{{ deployment.projectName }}</span>-->
+<!--                    <span class="absolute inset-0" />-->
+<!--                  </a>-->
+<!--                </h2>-->
+<!--              </div>-->
+<!--              <div class="mt-3 flex items-center gap-x-2.5 text-xs leading-5 text-gray-400">-->
+<!--                <p class="truncate">{{ deployment.description }}</p>-->
+<!--                <svg viewBox="0 0 2 2" class="h-0.5 w-0.5 flex-none fill-gray-300">-->
+<!--                  <circle cx="1" cy="1" r="1" />-->
+<!--                </svg>-->
+<!--                <p class="whitespace-nowrap">{{ deployment.statusText }}</p>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div :class="[environments[deployment.environment], 'rounded-full flex-none py-1 px-2 text-xs font-medium ring-1 ring-inset']">{{ deployment.environment }}</div>-->
+<!--            <ChevronRightIcon class="h-5 w-5 flex-none text-gray-400" aria-hidden="true" />-->
+<!--          </li>-->
+<!--        </ul>-->
+<!--      </main>-->
 
-      <!-- Activity feed -->
-      <aside class="bg-black/10 lg:fixed lg:bottom-0 lg:right-0 lg:top-16 lg:w-96 lg:overflow-y-auto lg:border-l lg:border-white/5">
-        <header class="flex items-center justify-between border-b border-white/5 px-4 py-4 sm:px-6 sm:py-6 lg:px-8">
-          <h2 class="text-base font-semibold leading-7 text-white">Activity feed</h2>
-          <a href="#" class="text-sm font-semibold leading-6 text-indigo-400">View all</a>
-        </header>
-        <ul role="list" class="divide-y divide-white/5">
-          <li v-for="item in activityItems" :key="item.commit" class="px-4 py-4 sm:px-6 lg:px-8">
-            <div class="flex items-center gap-x-3">
-              <img :src="item.user.imageUrl" alt="" class="h-6 w-6 flex-none rounded-full bg-gray-800" />
-              <h3 class="flex-auto truncate text-sm font-semibold leading-6 text-white">{{ item.user.name }}</h3>
-              <time :datetime="item.dateTime" class="flex-none text-xs text-gray-600">{{ item.date }}</time>
-            </div>
-            <p class="mt-3 truncate text-sm text-gray-500">
-              Pushed to <span class="text-gray-400">{{ item.projectName }}</span> (<span class="font-mono text-gray-400">{{ item.commit }}</span> on <span class="text-gray-400">{{ item.branch }}</span
-            >)
-            </p>
-          </li>
-        </ul>
-      </aside>
+<!--      &lt;!&ndash; Activity feed &ndash;&gt;-->
+<!--      <aside class="bg-black/10 lg:fixed lg:bottom-0 lg:right-0 lg:top-16 lg:w-96 lg:overflow-y-auto lg:border-l lg:border-white/5">-->
+<!--        <header class="flex items-center justify-between border-b border-white/5 px-4 py-4 sm:px-6 sm:py-6 lg:px-8">-->
+<!--          <h2 class="text-base font-semibold leading-7 text-white">Activity feed</h2>-->
+<!--          <a href="#" class="text-sm font-semibold leading-6 text-indigo-400">View all</a>-->
+<!--        </header>-->
+<!--        <ul role="list" class="divide-y divide-white/5">-->
+<!--          <li v-for="item in activityItems" :key="item.commit" class="px-4 py-4 sm:px-6 lg:px-8">-->
+<!--            <div class="flex items-center gap-x-3">-->
+<!--              <img :src="item.user.imageUrl" alt="" class="h-6 w-6 flex-none rounded-full bg-gray-800" />-->
+<!--              <h3 class="flex-auto truncate text-sm font-semibold leading-6 text-white">{{ item.user.name }}</h3>-->
+<!--              <time :datetime="item.dateTime" class="flex-none text-xs text-gray-600">{{ item.date }}</time>-->
+<!--            </div>-->
+<!--            <p class="mt-3 truncate text-sm text-gray-500">-->
+<!--              Pushed to <span class="text-gray-400">{{ item.projectName }}</span> (<span class="font-mono text-gray-400">{{ item.commit }}</span> on <span class="text-gray-400">{{ item.branch }}</span-->
+<!--            >)-->
+<!--            </p>-->
+<!--          </li>-->
+<!--        </ul>-->
+<!--      </aside>-->
     </div>
   </div>
 </template>
@@ -235,10 +227,10 @@ import {
 import { Bars3Icon, ChevronRightIcon, ChevronUpDownIcon, MagnifyingGlassIcon } from '@heroicons/vue/20/solid'
 
 const navigation = [
-  { name: 'Projects', href: '#', icon: FolderIcon, current: false },
-  { name: 'Deployments', href: '#', icon: ServerIcon, current: true },
-  { name: 'Activity', href: '#', icon: SignalIcon, current: false },
-  { name: 'Domains', href: '#', icon: GlobeAltIcon, current: false },
+  { name: 'Home', href: '#', icon: FolderIcon, current: false },
+  { name: 'Subjects', href: '/subject', icon: ServerIcon, current: true },
+  { name: 'Revision Activity', href: '#', icon: SignalIcon, current: false },
+  { name: 'Pathways', href: '#', icon: GlobeAltIcon, current: false },
   { name: 'Usage', href: '#', icon: ChartBarSquareIcon, current: false },
   { name: 'Settings', href: '#', icon: Cog6ToothIcon, current: false },
 ]
